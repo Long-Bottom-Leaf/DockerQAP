@@ -1,11 +1,13 @@
 Member Table:
 
 id - PK
+name
+address
+email
+membershipType
+phoneNumber
 startDate
-endDate
-location
-entryFee
-cashPrize
+duration
 
 Tournament Table
 
