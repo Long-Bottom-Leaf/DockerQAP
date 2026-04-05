@@ -20,6 +20,7 @@ public class Tournament {
     private Long id;
     private LocalDate startDate;
     private LocalDate endDate;
+    private String location;
     private Double entryFee;
     private Double cashPrize;
 
