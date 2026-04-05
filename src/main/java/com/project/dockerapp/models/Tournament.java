@@ -1,6 +1,7 @@
 package com.project.dockerapp.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,8 +20,12 @@ public class Tournament {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
     private LocalDate startDate;
+    @NotNull
     private LocalDate endDate;
+
     private String location;
     private Double entryFee;
     private Double cashPrize;
