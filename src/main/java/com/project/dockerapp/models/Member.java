@@ -36,6 +36,6 @@ public class Member {
     private LocalDate startDate;
     private int duration;
 
-    @ManyToMany(mappedBy = "members", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "participatingMembers", fetch = FetchType.LAZY)
     private List<Tournament> tournaments = new ArrayList<>();
 }
