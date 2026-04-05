@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
+    boolean existsByEmail(String email);
+
     List<Member> findByFirstName(String firstName);
 
     List<Member> findByLastName(String lastName);

@@ -25,4 +25,9 @@ public class GlobalExceptionHandler {
                 status
         );
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Object> handleGeneral(Exception ex) {
+        return buildResponse("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

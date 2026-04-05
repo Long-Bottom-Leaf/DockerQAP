@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -36,5 +37,5 @@ public class Member {
     private int duration;
 
     @ManyToMany(mappedBy = "members", fetch = FetchType.LAZY)
-    private List<Tournament> tournaments;
+    private List<Tournament> tournaments = new ArrayList<>();
 }
