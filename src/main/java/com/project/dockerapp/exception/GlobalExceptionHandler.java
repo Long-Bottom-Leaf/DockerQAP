@@ -10,13 +10,13 @@ import java.time.LocalDateTime;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<Object> handleNotFound(ResourceNotFoundException ex) {
-        return buildResponse(ex.getMessage(), HttpStatus.NOT_FOUND);
+    public ResponseEntity<Object> handleNotFound(ResourceNotFoundException exception) {
+        return buildResponse(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<Object> handleBadRequest(BadRequestException ex) {
-        return buildResponse(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<Object> handleBadRequest(BadRequestException exception) {
+        return buildResponse(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     private ResponseEntity<Object> buildResponse(String message, HttpStatus status) {
@@ -27,7 +27,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<Object> handleGeneral(Exception ex) {
+    public ResponseEntity<Object> handleGeneral(Exception exception) {
         return buildResponse("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
