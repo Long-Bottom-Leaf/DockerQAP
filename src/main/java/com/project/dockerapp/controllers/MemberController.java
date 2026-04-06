@@ -1,12 +1,15 @@
 package com.project.dockerapp.controllers;
 
 import com.project.dockerapp.models.Member;
+import com.project.dockerapp.models.MembershipType;
+import com.project.dockerapp.repository.MemberRepository;
 import com.project.dockerapp.services.MemberService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -14,9 +17,11 @@ import java.util.List;
 public class MemberController {
 
     private final MemberService memberService;
+    private final MemberRepository memberRepository;
 
-    public MemberController(MemberService memberService) {
+    public MemberController(MemberService memberService, MemberRepository memberRepository) {
         this.memberService = memberService;
+        this.memberRepository = memberRepository;
     }
 
     @PostMapping
@@ -41,5 +46,30 @@ public class MemberController {
     public ResponseEntity<Void> deleteMember(@PathVariable Long id) {
         memberService.deleteMember(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/search/firstname")
+    public ResponseEntity<List<Member>> getByFirstName(@RequestParam String firstName) {
+        return ResponseEntity.ok(memberRepository.findByFirstName(firstName));
+    }
+
+    @GetMapping("/search/lastname")
+    public ResponseEntity<List<Member>> getByLastName(@RequestParam String lastName) {
+        return ResponseEntity.ok(memberRepository.findByLastName(lastName));
+    }
+
+    @GetMapping("/search/type")
+    public ResponseEntity<List<Member>> getByMembershipType(@RequestParam MembershipType type) {
+        return ResponseEntity.ok(memberRepository.findByMembershipType(type));
+    }
+
+    @GetMapping("/search/phone")
+    public ResponseEntity<List<Member>> getByPhone(@RequestParam String phone) {
+        return ResponseEntity.ok(memberRepository.findByPhoneNumber(phone));
+    }
+
+    @GetMapping("/search/tournament-date")
+    public ResponseEntity<List<Member>> getByTournamentDate(@RequestParam LocalDate date) {
+        return ResponseEntity.ok(memberRepository.findByTournaments_StartDate(date));
     }
 }
