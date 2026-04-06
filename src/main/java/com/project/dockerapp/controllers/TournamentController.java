@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -63,5 +64,10 @@ public class TournamentController {
     @GetMapping("/search/member")
     public ResponseEntity<List<Tournament>> getByMember(@RequestParam Long memberId) {
         return ResponseEntity.ok(tournamentRepository.findByParticipatingMembers_Id(memberId));
+    }
+
+    @GetMapping("/search/date")
+    public ResponseEntity<List<Tournament>> getByStartDate(@RequestParam LocalDate date) {
+        return ResponseEntity.ok(tournamentRepository.findByStartDate(date));
     }
 }
