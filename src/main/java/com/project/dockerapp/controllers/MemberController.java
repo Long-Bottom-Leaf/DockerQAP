@@ -50,12 +50,12 @@ public class MemberController {
 
     @GetMapping("/search/firstname")
     public ResponseEntity<List<Member>> getByFirstName(@RequestParam String firstName) {
-        return ResponseEntity.ok(memberRepository.findByFirstName(firstName));
+        return ResponseEntity.ok(memberRepository.findByFirstNameIgnoreCase(firstName));
     }
 
     @GetMapping("/search/lastname")
     public ResponseEntity<List<Member>> getByLastName(@RequestParam String lastName) {
-        return ResponseEntity.ok(memberRepository.findByLastName(lastName));
+        return ResponseEntity.ok(memberRepository.findByLastNameIgnoreCase(lastName));
     }
 
     @GetMapping("/search/type")

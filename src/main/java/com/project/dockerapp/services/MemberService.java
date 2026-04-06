@@ -19,8 +19,8 @@ public class MemberService {
 
     public Member createMember(Member member) {
 
-        if (memberRepository.existsByEmail(member.getEmail())) {
-            throw new BadRequestException("Email already exists");
+        if (member.getEmail() == null || member.getEmail().isBlank()) {
+            throw new BadRequestException("Email is required");
         }
 
         return memberRepository.save(member);
