@@ -1,9 +1,9 @@
 package com.project.dockerapp.controllers;
 
 import com.project.dockerapp.models.Tournament;
+import com.project.dockerapp.repository.TournamentRepository;
 import com.project.dockerapp.services.TournamentService;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +14,11 @@ import java.util.List;
 @RequestMapping("/api/tournaments")
 public class TournamentController {
     private final TournamentService tournamentService;
+    private final TournamentRepository tournamentRepository;
 
-    public TournamentController(TournamentService tournamentService) {
+    public TournamentController(TournamentService tournamentService, TournamentRepository tournamentRepository) {
         this.tournamentService = tournamentService;
+        this.tournamentRepository = tournamentRepository;
     }
 
     @PostMapping
@@ -47,9 +49,19 @@ public class TournamentController {
     public ResponseEntity<Tournament> addMemberToTournament(
             @PathVariable Long tournamentId,
             @PathVariable Long memberId
-    ) {
-        return ResponseEntity.ok(
-                tournamentService.addMemberToTournament(tournamentId, memberId)
-        );
+        ) {
+            return ResponseEntity.ok(
+                    tournamentService.addMemberToTournament(tournamentId, memberId)
+            );
+    }
+
+    @GetMapping("/search/location")
+    public ResponseEntity<List<Tournament>> getByLocation(@RequestParam String location) {
+        return ResponseEntity.ok(tournamentRepository.findByLocation(location));
+    }
+
+    @GetMapping("/search/member")
+    public ResponseEntity<List<Tournament>> getByMember(@RequestParam Long memberId) {
+        return ResponseEntity.ok(tournamentRepository.findByParticipatingMembers_Id(memberId));
     }
 }
