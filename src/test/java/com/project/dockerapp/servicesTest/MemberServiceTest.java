@@ -3,6 +3,7 @@ package com.project.dockerapp.servicesTest;
 import com.project.dockerapp.exception.BadRequestException;
 import com.project.dockerapp.exception.ResourceNotFoundException;
 import com.project.dockerapp.models.Member;
+import com.project.dockerapp.models.MembershipType;
 import com.project.dockerapp.repository.MemberRepository;
 import com.project.dockerapp.services.MemberService;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,16 +28,25 @@ class MemberServiceTest {
 
     @Test
     void createMember_success() {
-        Member member = new Member();
-        member.setEmail("test@email.com");
+        Member member = new Member(
+                null,
+                "John",
+                "Doe",
+                "john@test.com",
+                "1234567890",
+                MembershipType.BASIC_MEMBER,
+                LocalDate.now(),
+                12,
+                null
+        );
 
-        when(memberRepository.existsByEmail(member.getEmail())).thenReturn(false);
-        when(memberRepository.save(member)).thenReturn(member);
+        when(memberRepository.existsByEmail(anyString())).thenReturn(false);
+        when(memberRepository.save(any(Member.class))).thenReturn(member);
 
-        Member result = memberService.createMember(member);
+        Member saved = memberService.createMember(member);
 
-        assertEquals(member, result);
-        verify(memberRepository).save(member);
+        assertNotNull(saved);
+        assertEquals("john@test.com", saved.getEmail());
     }
 
     @Test
@@ -48,6 +59,8 @@ class MemberServiceTest {
         assertThrows(BadRequestException.class, () -> {
             memberService.createMember(member);
         });
+
+        verify(memberRepository, never()).save(any());
     }
 
     @Test

@@ -23,6 +23,10 @@ public class MemberService {
             throw new BadRequestException("Email is required");
         }
 
+        if (memberRepository.existsByEmail(member.getEmail())) {
+            throw new BadRequestException("Email already exists");
+        }
+
         return memberRepository.save(member);
     }
 
