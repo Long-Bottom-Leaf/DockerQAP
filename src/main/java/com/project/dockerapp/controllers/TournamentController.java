@@ -70,4 +70,20 @@ public class TournamentController {
     public ResponseEntity<List<Tournament>> getByStartDate(@RequestParam LocalDate date) {
         return ResponseEntity.ok(tournamentRepository.findByStartDate(date));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Tournament> updateTournament(
+            @PathVariable Long id,
+            @RequestBody Tournament updatedTournament
+    ) {
+        Tournament existing = tournamentService.getTournamentById(id);
+
+        existing.setStartDate(updatedTournament.getStartDate());
+        existing.setEndDate(updatedTournament.getEndDate());
+        existing.setLocation(updatedTournament.getLocation());
+        existing.setEntryFee(updatedTournament.getEntryFee());
+        existing.setCashPrize(updatedTournament.getCashPrize());
+
+        return ResponseEntity.ok(tournamentRepository.save(existing));
+    }
 }

@@ -72,4 +72,22 @@ public class MemberController {
     public ResponseEntity<List<Member>> getByTournamentDate(@RequestParam LocalDate date) {
         return ResponseEntity.ok(memberRepository.findByTournaments_StartDate(date));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Member> updateMember(
+            @PathVariable Long id,
+            @RequestBody Member updatedMember
+    ) {
+        Member existing = memberService.getMemberById(id);
+
+        existing.setFirstName(updatedMember.getFirstName());
+        existing.setLastName(updatedMember.getLastName());
+        existing.setEmail(updatedMember.getEmail());
+        existing.setPhoneNumber(updatedMember.getPhoneNumber());
+        existing.setMembershipType(updatedMember.getMembershipType());
+        existing.setStartDate(updatedMember.getStartDate());
+        existing.setDuration(updatedMember.getDuration());
+
+        return ResponseEntity.ok(memberRepository.save(existing));
+    }
 }
