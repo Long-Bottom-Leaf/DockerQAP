@@ -116,7 +116,32 @@ JUnit and Mockito were used to test the service layer:
 ## Postman Testing
 
 All endpoints were tested using Postman.
-(Screenshots included in submission)
+
+### Post Member
+
+![Post Member](DevDocs/Images/Post%20Member.jpg)
+
+### Get Members
+
+![Get Member](DevDocs/Images/Get%20Members.jpg)
+
+### Get By Member Details
+
+![Get By Name](DevDocs/Images/Get%20by%20Name.jpg)
+
+### Post Tournament
+
+![Post Tournament](DevDocs/Images/Post%20Tournament.jpg)
+
+### Add Members To Tournament/Get Tournament
+
+![Add Members To Tournament](DevDocs/Images/Add%20members%20to%20tournament.jpg)
+
+![Get Tournaments](DevDocs/Images/Get%20Tournaments.jpg)
+
+### Duplicate Email Check
+
+![Duplicate Email Check](DevDocs/Images/Duplicate%20email%20check.jpg)
 
 ---
 
@@ -124,5 +149,5 @@ All endpoints were tested using Postman.
 
 * Add authentication (Spring Security)
 * Improve validation and error handling
-* 
+
 ---
