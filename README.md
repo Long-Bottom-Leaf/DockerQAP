@@ -1,0 +1,128 @@
+# Golf Club Management API
+
+## Overview
+
+This project is a Spring Boot REST API for managing members and tournaments in a golf club system. It supports full CRUD operations and relationships between members and tournaments.
+
+---
+
+## Technologies Used
+
+* Java 21
+* Spring Boot
+* Spring Data JPA
+* PostgreSQL
+* Maven
+* JUnit & Mockito
+* Postman
+
+---
+
+## Features
+
+### Member Management
+
+* Create member
+* Get all members
+* Get member by ID
+* Delete member
+* Update member
+* Search by:
+
+    * First name
+    * Last name
+    * Membership type
+    * Phone number
+    * Tournament date
+
+### Tournament Management
+
+* Create tournament
+* Get all tournaments
+* Get tournament by ID
+* Delete tournament
+* Update tournament
+* Add member to tournament
+* Search by:
+
+    * Location
+    * Member ID
+
+---
+
+## API Base URL
+
+```
+http://localhost:8080/api
+```
+
+---
+
+## Example Endpoints
+
+### Members
+
+* POST `/members`
+* GET `/members`
+* GET `/members/{id}`
+* PUT `/members/{id}`
+* DELETE `/members/{id}`
+
+### Tournaments
+
+* POST `/tournaments`
+* GET `/tournaments`
+* GET `/tournaments/{id}`
+* PUT `/tournaments/{id}`
+* DELETE `/tournaments/{id}`
+
+### Relationship
+
+* POST `/tournaments/{tournamentId}/members/{memberId}`
+
+---
+
+## Database Configuration
+
+PostgreSQL is used as the database.
+
+Example `application.yml`:
+
+```
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/golf_db
+    username: postgres
+    password: your_password
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+```
+
+---
+
+## Testing
+
+JUnit and Mockito were used to test the service layer:
+
+* MemberService tests
+* TournamentService tests
+* Exception handling validation
+
+---
+
+## Postman Testing
+
+All endpoints were tested using Postman.
+(Screenshots included in submission)
+
+---
+
+## Future Improvements
+
+* Add authentication (Spring Security)
+* Improve validation and error handling
+* 
+---
