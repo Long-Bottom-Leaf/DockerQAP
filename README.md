@@ -91,14 +91,19 @@ Example `application.yml`:
 ```
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/golf_db
-    username: postgres
-    password: your_password
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
 
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+  h2:
+    console:
+      enabled: true
 ```
 
 ---
@@ -115,7 +120,7 @@ JUnit and Mockito were used to test the service layer:
 
 ## Postman Testing
 
-All endpoints were tested using Postman.
+All endpoints were tested using Postman however I only included 6 screenshots to show the program works.
 
 ### Post Member
 
@@ -133,11 +138,9 @@ All endpoints were tested using Postman.
 
 ![Post Tournament](DevDocs/Images/Post%20Tournament.jpg)
 
-### Add Members To Tournament/Get Tournament
+### Add Members To Tournament
 
 ![Add Members To Tournament](DevDocs/Images/Add%20members%20to%20tournament.jpg)
-
-![Get Tournaments](DevDocs/Images/Get%20Tournaments.jpg)
 
 ### Duplicate Email Check
 
@@ -145,9 +148,14 @@ All endpoints were tested using Postman.
 
 ---
 
+## Docker Image Running
+
+![Docker Image Running](DevDocs/Images/Docker%20Image.jpg)
+
 ## Future Improvements
 
 * Add authentication (Spring Security)
 * Improve validation and error handling
+* 
 
 ---
