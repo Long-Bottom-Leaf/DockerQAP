@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: golf-db
+    environment:
+      POSTGRES_DB: golf_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Keyin1234
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    image: stephennl/dockerqap:latest
+    container_name: golf-app
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/golf_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: Keyin1234
+
+volumes:
+  postgres_data:
